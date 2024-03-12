@@ -10,6 +10,7 @@ def delete_rows(conn, table, attribute, condition):
     except Exception as e:
         print("Feil: ", e)
 
+#sette inn rader
 def insert_row(conn, table, values):
     try:
         placeholders = ', '.join(['?'] * len(values))
@@ -18,4 +19,16 @@ def insert_row(conn, table, values):
         conn.commit()
     except Exception as e:
         print("Feil: ", e)
+
+#få nå tid (klokkeslett)
+def get_time():
+    import datetime
+    now = datetime.datetime.now()
+    return "'"+ now.strftime("%H:%M:%S") + "'"
+
+#få dagens dato
+def get_date():
+    import datetime
+    now = datetime.datetime.now()
+    return  "'" + now.strftime("%Y-%m-%d") + "'"
 
