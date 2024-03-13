@@ -32,3 +32,15 @@ def get_date():
     now = datetime.datetime.now()
     return  "'" + now.strftime("%Y-%m-%d") + "'"
 
+
+def add_seat(seteID, radnr, omraade, salnavn):
+    # TODO: legge inn sete med samme seteid som setenummer
+            #insert_row(con, 'Sete', [seteID, seteID, radnr, omraade, salnavn])
+            print("Sete med ID: " + str(seteID) + " og radnr: " + str(radnr) + " lagt til")
+
+
+def book_seat(seteID, billettID, billettype, billettpris):
+    # TODO: legge inn billett, NB pass på rekkefølge av attributtene
+            #insert_row(con, 'Billett', [billettID, billettype, billettpris, seteID])
+            print("Billett med ID: " + str(billettID) + " og seteID: " + str(seteID) + " lagt til")
+
