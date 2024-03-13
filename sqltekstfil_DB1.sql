@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS "Akt"(
     "AktNr" INTEGER NOT NULL,
     "AktNavn" TEXT,
     "TeaterstykkeNavn" TEXT NOT NULL,
-    PRIMARY KEY("AktNr"),
+    PRIMARY KEY("AktNr", "TeaterstykkeNavn"),
     FOREIGN KEY ("TeaterstykkeNavn") REFERENCES "Teaterstykke"("TeaterstykkeNavn") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
