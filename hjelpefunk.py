@@ -44,3 +44,23 @@ def book_seat(con, seteID, billettID, billettype, billettpris, kjopID, forestill
             insert_row(con, 'Billett', [billettID, billettype, billettpris, kjopID, seteID, forestillingID])
             print("Billett med ID: " + str(billettID) + " og seteID: "  + str(seteID) + " lagt til")
 
+
+
+
+def get_avalible_seats(con, cursor, radNr, omraade, salnavn, forestillingsID):
+      
+    sql = f'''SELECT Sete.seteID
+            FROM Sete
+            WHERE Sete.seteID NOT IN 
+                (SELECT Billett.seteID FROM Billett 
+                WHERE Billett.forestillingsID = {forestillingsID})
+            AND Sete.radnr = {radNr} 
+            AND Sete.omraade = '{omraade}' 
+            AND Sete.salnavn = '{salnavn}' '''
+    cursor.execute(sql)
+    seats = cursor.fetchall()
+    con.commit()
+
+    seats = [seat[0] for seat in seats]
+    return seats
+
