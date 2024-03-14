@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS "Billett"(
     FOREIGN KEY ("KjopID") REFERENCES "Billettkjop"("KjopID") ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY ("SeteID") REFERENCES "Sete"("SeteID") ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY ("ForestillingsID") REFERENCES "Forestilling"("ForestillingsID") ON DELETE CASCADE ON UPDATE CASCADE,
-    UNIQUE("Type", "Pris", "ForestillingsID")
+    UNIQUE("Type", "Pris", "ForestillingsID", "SeteID")
 );
 
 CREATE TABLE IF NOT EXISTS "Akt"(
