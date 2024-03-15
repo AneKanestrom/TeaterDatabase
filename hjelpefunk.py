@@ -64,3 +64,23 @@ def get_avalible_seats(con, cursor, radNr, omraade, salnavn, forestillingsID):
     seats = [seat[0] for seat in seats]
     return seats
 
+
+""" def get_play_on_date(con, cursor, wanted_date):
+      
+    sql = f'''SELECT Forestilling.*, Teaterstykke.TeaterstykkeNavn, COUNT(Billett.BillettID) as AntallBilletter
+            FROM Forestilling
+            JOIN Teaterstykke
+            ON Forestilling.TeaterstykkeNavn = Teaterstykke.TeaterstykkeNavn
+            JOIN Billett
+            ON Forestilling.ForestillingsID = Billett.ForestillingsID
+            WHERE Forestilling.dato = {wanted_date}
+            GROUP BY Teaterstykke.TeaterstykkeNavn; '''
+    cursor.execute(sql)
+    result = cursor.fetchall()
+    con.commit()
+    
+    play_result = [result[-2:] for result in result]    
+    
+    return play_result """
+
+
