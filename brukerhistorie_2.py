@@ -135,3 +135,6 @@ for line in lines[11:]:
         seteNummer += 1
 
     radnr -= 1
+
+cursor.close()
+con.close()
