@@ -34,19 +34,17 @@ def get_date():
 
 
 def add_seat(con, seteID, seteNummer, radnr, omraade, salnavn):
-    # TODO: legge inn sete med samme seteid som setenummer
             insert_row(con, 'Sete', [seteID, seteNummer, radnr, omraade, salnavn])
             print("Sete med ID: " + str(seteID) + " og radnr: " + str(radnr) + " lagt til")
 
 
 def book_seat(con, seteID, billettID, billettype, billettpris, kjopID, forestillingID):
-    # TODO: legge inn billett, NB pass på rekkefølge av attributtene
             insert_row(con, 'Billett', [billettID, billettype, billettpris, kjopID, seteID, forestillingID])
             print("Billett med ID: " + str(billettID) + " og seteID: "  + str(seteID) + " lagt til")
 
 
 
-
+# finner seteID til alle setene i en rad
 def get_avalible_seats(con, cursor, radNr, omraade, salnavn, forestillingsID):
       
     sql = f'''SELECT Sete.seteID
@@ -65,22 +63,16 @@ def get_avalible_seats(con, cursor, radNr, omraade, salnavn, forestillingsID):
     return seats
 
 
-""" def get_play_on_date(con, cursor, wanted_date):
-      
-    sql = f'''SELECT Forestilling.*, Teaterstykke.TeaterstykkeNavn, COUNT(Billett.BillettID) as AntallBilletter
-            FROM Forestilling
-            JOIN Teaterstykke
-            ON Forestilling.TeaterstykkeNavn = Teaterstykke.TeaterstykkeNavn
-            JOIN Billett
-            ON Forestilling.ForestillingsID = Billett.ForestillingsID
-            WHERE Forestilling.dato = {wanted_date}
-            GROUP BY Teaterstykke.TeaterstykkeNavn; '''
+#hente høyeste verdi for IDer
+def get_highest_value(con, cursor, tabellNavn, attributt):
+    
+    sql = f'''
+        SELECT MAX({attributt})
+        FROM {tabellNavn} '''
+    
     cursor.execute(sql)
     result = cursor.fetchall()
     con.commit()
     
-    play_result = [result[-2:] for result in result]    
-    
-    return play_result """
-
+    return result[0][0]
 
