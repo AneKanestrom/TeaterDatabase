@@ -3,17 +3,22 @@ from hjelpefunk import *
 con = sqlite3.connect("emptydatabase3.db")
 cursor = con.cursor()
 
-#dato = '2024-02-03'
+dato = '2024-02-03'
 type = 'ordinaer'
 pris = 350
 salnavn = "Gamle Scene"
 forestillingID = 6
 
-#! Har ikke fått testet om denne fungerer
-""" dato = '2024-02-03'
-cursor.execute("SELECT ForestillingID FROM Forestilling WHERE Dato = ?", (dato,))
-forestillingID = cursor.fetchone()[0]
- """
+#OBS! DENNE ER IKKE TESTET, HVIS DEN PRINTER FORESTILLINGID = 6 KAN DERE SLETTE DEN VARIABELEN
+#Henter ut forestillingID
+sql = f'''SELECT ForestillingsID 
+            FROM Forestilling WHERE Dato = {dato}'''
+
+#kjører sql spørringen
+cursor.execute(sql)
+#Henter ut resultatet
+forestillingID = cursor.fetchall()
+ 
 wanted_tickets = 0
 wanted_area = ''
 wanted_row = 0
