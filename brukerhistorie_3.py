@@ -1,6 +1,6 @@
 import sqlite3
 from hjelpefunk import *  
-con = sqlite3.connect("db_01.db")
+con = sqlite3.connect("emptydatabase3.db")
 cursor = con.cursor()
 
 #dato = '2024-02-03'
@@ -34,5 +34,3 @@ while running:
     
     running = False
 
-cursor.close()
-con.close()

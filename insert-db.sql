@@ -1,11 +1,11 @@
 -- brukerhistorie 1
-INSERT INTO Sal VALUES('Hovedscenen', 516)
-INSERT INTO Sal VALUES('Gamle Scene', 332)
+INSERT INTO Sal VALUES('Hovedscenen', 516);
+INSERT INTO Sal VALUES('Gamle Scene', 332);
 
-INSERT INTO Teaterstykke VALUES('Kongsemnene')
-INSERT INTO Teaterstykke VALUES('Storst av alt er kjaerligheten')
+INSERT INTO Teaterstykke VALUES('Kongsemnene');
+INSERT INTO Teaterstykke VALUES('Storst av alt er kjaerligheten');
 
-INSERT INTO Forestilling (ForestillingID, Dato, StartTid, Sesong, SalNavn, TeaterstykkeNavn)
+INSERT INTO Forestilling(ForestillingsID, Dato, StartTid, Sesong, SalNavn, TeaterstykkeNavn)
 VALUES 
     (1, '2024-02-01', '19:00:00', 'vinter/vaarsesongen 2024', 'Hovedscenen', 'Kongsemnene'),
     (2, '2024-02-02', '19:00:00', 'vinter/vaarsesongen 2024', 'Hovedscenen', 'Kongsemnene'),
@@ -84,7 +84,13 @@ VALUES
     (3, 'Aleksandr Shishkin-Hokusai', 'shishkinhokusai@trondelagteater.no', 'Midlertidig', 'Scenografi'),
     (4, 'Aleksandr Shishkin-Hokusai', 'shishkinhokusai@trondelagteater.no', 'Innleid', 'Kostymer'),
     (5, 'Eivind Myren', 'myren@trondelagteater.no', 'Fast', 'Lysdesign'),
-    (6, 'Mina Rype Stokke', 'stokke@trondelagteater.no', 'Midlertidig', 'Dramaturg');
+    (6, 'Mina Rype Stokke', 'stokke@trondelagteater.no', 'Midlertidig', 'Dramaturg'),
+    (7, 'Jonas Corell Petersen', 'petersen@trondelagteater.no', 'Fast', 'Regi'),
+    (8, 'David Gehrt', 'gehrt@trondelagteater.no', 'Midlertidig', 'Scenografi'),
+    (9, 'David Gehrt', 'gehrt@trondelagteater.no', 'Innleid', 'Kostymer'),
+    (10, 'Gaute Tonder', 'tonder@trondelagteater.no', 'Fast', 'Musikalsk ansvarlig'),
+    (11, 'Magnus Mikaelsen', 'mikaelsen@trondelagteater.no', 'Fast', 'Lysdesign'),
+    (12, 'Kristoffer Spender', 'spender@trondelagteater.no', 'Midlertidig', 'Dramaturg');
 
 ----
 INSERT INTO RolleStykke (RolleID, TeaterstykkeNavn)
