@@ -1,4 +1,3 @@
-import numpy as np
 import sqlite3
 from hjelpefunk import *  
 con = sqlite3.connect("db_01.db")
