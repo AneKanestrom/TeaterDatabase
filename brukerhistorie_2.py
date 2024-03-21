@@ -1,6 +1,6 @@
 import sqlite3
 from hjelpefunk import *  
-con = sqlite3.connect("emptydatabase3.db")
+con = sqlite3.connect("emptyy.db")
 cursor = con.cursor()
 
 kundeID = 1

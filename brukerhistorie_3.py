@@ -4,7 +4,7 @@ con = sqlite3.connect("emptydatabase3.db")
 cursor = con.cursor()
 
 dato = '2024-02-03'
-type = 'ordinaer'
+type = 'ordinær'
 pris = 350
 salnavn = "Gamle Scene"
 forestillingID = 6
@@ -19,30 +19,30 @@ cursor.execute(sql)
 #Henter ut resultatet
 forestillingID = cursor.fetchall()
  
-wanted_tickets = 0
-wanted_area = ''
-wanted_row = 0
+ønskede_billetter = 0
+ønsket_område = ''
+ønsket_rad = 0
 
 running = True
 while running:
     print("Velkommen til størst av alt er kjærligheten! ...")
     try:
-        wanted_tickets = 9 # int(input("Antall billetter ordinær (1-9): "))
-        wanted_area = "Galleri" # input("Område (Galleri/Balkong/Parkett): ")
-        wanted_row = 1 # int(input("Radnummer (1-10): "))
+        ønskede_billetter = 9 # int(input("Antall billetter ordinær (1-9): "))
+        ønsket_område = "Galleri" # input("Område (Galleri/Balkong/Parkett): ")
+        ønsket_rad = 1 # int(input("Radnummer (1-10): "))
     except:
-        print("Invalid ikke gyldig. Vær så snill å prøv igjen.")
+        print("Ugyldig inndata. Vennligst prøv igjen.")
         continue
     
-    avaliable_seats = get_avalible_seats(con, cursor, wanted_row, wanted_area, salnavn, forestillingID)
+    tilgjengelige_seter = get_avalible_seats(con, cursor, ønsket_rad, ønsket_område, salnavn, forestillingID)
 
-    if wanted_tickets > len(avaliable_seats):
-        print(f"Det er ikke {wanted_tickets} ledige seter på rad {wanted_row}.")
+    if ønskede_billetter > len(tilgjengelige_seter):
+        print(f"Det er ikke {ønskede_billetter} ledige seter på rad {ønsket_rad}.")
         continue
 
-    your_seats = avaliable_seats[0:wanted_tickets]
+    dine_seter = tilgjengelige_seter[0:ønskede_billetter]
     
-    print(f"Det koster {pris*wanted_tickets}kr for {wanted_tickets} billetter i {wanted_area} på rad {wanted_row}.")
+    print(f"Det koster {pris*ønskede_billetter}kr for {ønskede_billetter} billetter i {ønsket_område} på rad {ønsket_rad}.")
     
 
     billettkjopID = get_highest_value(con, cursor, 'Billettkjop', 'KjopID' ) + 1
@@ -54,18 +54,10 @@ while running:
     insert_row(con, 'Billettkjop', kjop1)
 
     #legger til 9 billetter på kjøpIDen
-    for seatID in your_seats:
-        insert_row(con, 'Billett', [billettID, type, pris, billettkjopID, seatID, forestillingID ] )
+    for seteID in dine_seter:
+        insert_row(con, 'Billett', [billettID, type, pris, billettkjopID, seteID, forestillingID ] )
         billettID += 1
 
-    print(f"Du har kjøpt setene med ID: {your_seats}")
+    print(f"Du har kjøpt setene med ID: {dine_seter}")
 
     running = False 
-    
-
-    
-
-
-
-
-
