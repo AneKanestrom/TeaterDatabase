@@ -19,17 +19,17 @@ sql = f'''SELECT Forestilling.*, Teaterstykke.TeaterstykkeNavn, COUNT(Billett.Bi
 cursor.execute(sql)
 
 #Henter ut resultatet
-result = cursor.fetchall()
+resultat = cursor.fetchall()
 
 #selekterer ønsket data
-play_result = [result[-2:] for result in result]
+forestilling_resultat = [resultat[-2:] for resultat in resultat]
 
 #Går gjennom resultatet og printer ut
 print(f'For {onsket_dato} er det følgende forestillinger og solgte billetter:')
 print('-----------------------------')
-for play in play_result:
-    print(f'Forestilling: {play[0]}')
-    print(f'Antall solgte billetter: {play[1]}')
+for forestilling in forestilling_resultat:
+    print(f'Forestilling: {forestilling[0]}')
+    print(f'Antall solgte billetter: {forestilling[1]}')
     print('-----------------------------')
 
 cursor.close()
