@@ -1,6 +1,6 @@
 import sqlite3
 from hjelpefunk import *  
-con = sqlite3.connect("emptydatabase3.db")
+con = sqlite3.connect("tom_database.db")
 cursor = con.cursor()
 
 #Hente ut dato

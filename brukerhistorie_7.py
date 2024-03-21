@@ -1,6 +1,6 @@
 import sqlite3
 from hjelpefunk import *  
-con = sqlite3.connect("emptydatabase3.db")
+con = sqlite3.connect("tom_database.db")
 cursor = con.cursor()
 
 def skuespillere_i_samme_akt(skuespiller_navn):

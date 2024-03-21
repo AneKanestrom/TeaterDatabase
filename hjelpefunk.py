@@ -76,3 +76,5 @@ def hent_hoyeste_verdi(con, cursor, tabellNavn, attributt):
     
     return result[0][0]
 
+
+
