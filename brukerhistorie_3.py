@@ -19,45 +19,45 @@ cursor.execute(sql)
 #Henter ut resultatet
 forestillingID = cursor.fetchall()
  
-ønskede_billetter = 0
-ønsket_område = ''
-ønsket_rad = 0
+onskede_billetter = 0
+onsket_område = ''
+onsket_rad = 0
 
 running = True
 while running:
-    print("Velkommen til størst av alt er kjærligheten! ...")
+    print("Velkommen til storst av alt er kjærligheten! ...")
     try:
-        ønskede_billetter = 9 # int(input("Antall billetter ordinær (1-9): "))
-        ønsket_område = "Galleri" # input("Område (Galleri/Balkong/Parkett): ")
-        ønsket_rad = 1 # int(input("Radnummer (1-10): "))
+        onskede_billetter = 9 # int(input("Antall billetter ordinær (1-9): "))
+        onsket_område = "Galleri" # input("Område (Galleri/Balkong/Parkett): ")
+        onsket_rad = 1 # int(input("Radnummer (1-10): "))
     except:
-        print("Ugyldig inndata. Vennligst prøv igjen.")
+        print("Ugyldig inndata. Vennligst prov igjen.")
         continue
     
-    tilgjengelige_seter = get_avalible_seats(con, cursor, ønsket_rad, ønsket_område, salnavn, forestillingID)
+    tilgjengelige_seter = hent_ledige_seter(con, cursor, onsket_rad, onsket_område, salnavn, forestillingID)
 
-    if ønskede_billetter > len(tilgjengelige_seter):
-        print(f"Det er ikke {ønskede_billetter} ledige seter på rad {ønsket_rad}.")
+    if onskede_billetter > len(tilgjengelige_seter):
+        print(f"Det er ikke {onskede_billetter} ledige seter på rad {onsket_rad}.")
         continue
 
-    dine_seter = tilgjengelige_seter[0:ønskede_billetter]
+    dine_seter = tilgjengelige_seter[0:onskede_billetter]
     
-    print(f"Det koster {pris*ønskede_billetter}kr for {ønskede_billetter} billetter i {ønsket_område} på rad {ønsket_rad}.")
+    print(f"Det koster {pris*onskede_billetter}kr for {onskede_billetter} billetter i {onsket_område} på rad {onsket_rad}.")
     
 
-    billettkjopID = get_highest_value(con, cursor, 'Billettkjop', 'KjopID' ) + 1
-    billettID = get_highest_value(con, cursor, 'Billett', 'BillettID') + 1
+    billettkjopID = hent_hoyeste_verdi(con, cursor, 'Billettkjop', 'KjopID' ) + 1
+    billettID = hent_hoyeste_verdi(con, cursor, 'Billett', 'BillettID') + 1
     
 
     #legger til kjøpet i databasen
-    kjop1 = [billettkjopID, get_date(), get_time(), 1]
-    insert_row(con, 'Billettkjop', kjop1)
+    kjop1 = [billettkjopID, hent_tid(), hent_tid(), 1]
+    sett_inn_rad(con, 'Billettkjop', kjop1)
 
     #legger til 9 billetter på kjøpIDen
     for seteID in dine_seter:
-        insert_row(con, 'Billett', [billettID, type, pris, billettkjopID, seteID, forestillingID ] )
+        sett_inn_rad(con, 'Billett', [billettID, type, pris, billettkjopID, seteID, forestillingID ] )
         billettID += 1
 
-    print(f"Du har kjøpt setene med ID: {dine_seter}")
+    print(f"Du har kjopt setene med ID: {dine_seter}")
 
     running = False 

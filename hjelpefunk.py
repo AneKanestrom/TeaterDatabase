@@ -2,7 +2,7 @@
 
 #sletting av rader
 
-def delete_rows(conn, table, attribute, condition):
+def slett_rad(conn, table, attribute, condition):
     try:
         sql = f'''DELETE FROM {table} WHERE {attribute} = '{condition}' '''
         conn.execute(sql)
@@ -11,7 +11,7 @@ def delete_rows(conn, table, attribute, condition):
         print("Feil: ", e)
 
 #sette inn rader
-def insert_row(conn, table, values):
+def sett_inn_rad(conn, table, values):
     try:
         placeholders = ', '.join(['?'] * len(values))
         sql = f'''INSERT INTO {table} VALUES ({placeholders})'''
@@ -21,31 +21,31 @@ def insert_row(conn, table, values):
         print("Feil: ", e)
 
 #få nå tid (klokkeslett)
-def get_time():
+def hent_tid():
     import datetime
     now = datetime.datetime.now()
     return "'"+ now.strftime("%H:%M:%S") + "'"
 
 #få dagens dato
-def get_date():
+def hent_dato():
     import datetime
     now = datetime.datetime.now()
     return  "'" + now.strftime("%Y-%m-%d") + "'"
 
 
-def add_seat(con, seteID, seteNummer, radnr, omraade, salnavn):
-            insert_row(con, 'Sete', [seteID, seteNummer, radnr, omraade, salnavn])
+def legg_til_sete(con, seteID, seteNummer, radnr, omraade, salnavn):
+            sett_inn_rad(con, 'Sete', [seteID, seteNummer, radnr, omraade, salnavn])
             print("Sete med ID: " + str(seteID) + " og radnr: " + str(radnr) + " lagt til")
 
 
-def book_seat(con, seteID, billettID, billettype, billettpris, kjopID, forestillingID):
-            insert_row(con, 'Billett', [billettID, billettype, billettpris, kjopID, seteID, forestillingID])
+def reserver_sete(con, seteID, billettID, billettype, billettpris, kjopID, forestillingID):
+            sett_inn_rad(con, 'Billett', [billettID, billettype, billettpris, kjopID, seteID, forestillingID])
             print("Billett med ID: " + str(billettID) + " og seteID: "  + str(seteID) + " lagt til")
 
 
 
 # finner seteID til alle setene i en rad
-def get_avalible_seats(con, cursor, radNr, omraade, salnavn, forestillingsID):
+def hent_ledige_seter(con, cursor, radNr, omraade, salnavn, forestillingsID):
       
     sql = f'''SELECT Sete.seteID
             FROM Sete
@@ -56,21 +56,21 @@ def get_avalible_seats(con, cursor, radNr, omraade, salnavn, forestillingsID):
             AND Sete.omraade = '{omraade}' 
             AND Sete.salnavn = '{salnavn}' '''
     cursor.execute(sql)
-    seats = cursor.fetchall()
+    seter = cursor.fetchall()
     con.commit()
 
-    seats = [seat[0] for seat in seats]
-    return seats
+    seter = [sete[0] for sete in seter]
+    return seter
 
 
 #hente høyeste verdi for IDer
-def get_highest_value(con, cursor, tabellNavn, attributt):
+def hent_hoyeste_verdi(con, cursor, tabellNavn, attributt):
     
     sql = f'''
         SELECT MAX({attributt})
         FROM {tabellNavn} '''
     
-    cursor.execute(sql)
+    cursor.execute(sql) 
     result = cursor.fetchall()
     con.commit()
     
